@@ -22,7 +22,7 @@ poetry run cookiecutter git@github.com:sgelis/cookiecutter-django.git
 
 > project_name [FooProject]: 
 > project_slug [fooproject]: 
-> company [EvilCorp] : 
+> company [EvilCorp]: 
 > python_interpreter [/usr/bin/python3]: 
 ```
 
