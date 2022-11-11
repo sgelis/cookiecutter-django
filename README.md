@@ -27,7 +27,7 @@ poetry run cookiecutter git@github.com:sgelis/cookiecutter-django.git
 ```
 
 - Make sure all dev requirements are installed on your system (listed on
-[the project's README]({{cookiecutter.project_name}/README.md)).
+[the project's README]({{cookiecutter.project_name}}/README.md)).
 - Start developing:
 
 ```sh
