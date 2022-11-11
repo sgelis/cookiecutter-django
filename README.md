@@ -22,12 +22,12 @@ poetry run cookiecutter git@github.com:sgelis/cookiecutter-django.git
 
 > project_name [FooProject]: 
 > project_slug [fooproject]: 
-> company [EvilCorp] : 
+> company [EvilCorp]: 
 > python_interpreter [/usr/bin/python3]: 
 ```
 
 - Make sure all dev requirements are installed on your system (listed on
-[the project's README]({{cookiecutter.project_name}/README.md)).
+[the project's README]({{cookiecutter.project_name}}/README.md)).
 - Start developing:
 
 ```sh
