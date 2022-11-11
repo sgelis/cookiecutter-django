@@ -1,0 +1,17 @@
+{% raw %}{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static "admin/css/{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.css" %}">
+{% endblock %}
+{% block extrahead %}
+  {{ block.super }}
+  {% include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/includes/favicon.html" %}
+{% endblock %}
+
+{% block footer %}
+  <footer id="footer">{{ project_name }} v.{{ version }}</footer>
+
+  <script src="{% static "admin/js/bundle.js" %}"></script>
+{% endblock %}{% endraw %}

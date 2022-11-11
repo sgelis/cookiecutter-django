@@ -1,0 +1,133 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_name }}"
+version = "0.0.0"
+description = ""
+license = "Proprietary"
+authors = ["{{ cookiecutter.company }} <dev@{{ cookiecutter.company }}.com>"]
+readme = "README.md"
+repository = "https://github.com/{{ cookiecutter.company }}/{{ cookiecutter.project_slug}}"
+
+[tool.poetry.dependencies]
+python = ">= 3.9, < 3.11"
+Django = "~4.1.3"
+django-axes = "==5.39.0"
+django-cors-headers = "~3.13.0"
+django-csp = "~3.7"
+django-environ = "~0.9.0"
+django-filter = "~22.1"
+django-request-logging = "~0.7.5"
+djangorestframework = "~3.14.0"
+djangorestframework-simplejwt = "~5.2.2"
+drf-spectacular = {extras = ["sidecar"], version = "~0.24.2"}
+psycopg2 = "~2.9.5"
+pymemcache = "~4.0.0"
+pyuca = "~1.2"
+PyYAML = "~6.0"
+typing-extensions = "~4.4.0"
+uritemplate = "~4.1.1"
+uWSGI = "~2.0.21"
+whitenoise = {extras = ["brotli"], version = "~6.2.0"}
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.7.4"
+black = "^22.10.0"
+coverage = {extras = ["toml"], version = "^6.5.0"}
+django-debug-toolbar = "^3.7.0"
+django-extensions = "^3.2.1"
+django-stubs = "^1.13.0"
+djangorestframework-stubs = "^1.7.0"
+invoke = "^1.7.3"
+ipython = "^8.6.0"
+isort = "^5.10.1"
+mkdocs = "^1.4.2"
+mkdocs-gen-files = "^0.4.0"
+mkdocs-literate-nav = "^0.5.0"
+mkdocs-material = "^8.5.9"
+mkdocs-section-index = "^0.3.4"
+mkdocstrings = {extras = ["python"], version = "^0.19.0"}
+mypy = "^0.990"
+pytest = "^7.2.0"
+pytest-django = "^4.5.2"
+pytest-mock = "^3.10.0"
+requests-mock = "^1.10.0"
+types-requests = "^2.28.11.2"
+Werkzeug = "^2.2.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.mypy]
+allow_redefinition = true
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+show_error_codes = true
+pretty = true
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[[tool.mypy.overrides]]
+# Migrations and tests should not raise errors
+module = ["*.migrations.*", "*.tests.*"]
+ignore_errors = true
+
+[tool.django-stubs]
+django_settings_module = "config.settings.dev"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.dev"
+python_files = "tests.py test_*.py *_tests.py"
+addopts = "--strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')"
+]
+
+[tool.coverage.run]
+omit = [
+    "*venv*",
+    "*virtualenvs*",
+    "*migrations*",
+    "*tests*",
+    "*test*",
+    "manage.py",
+    "config/asgi.py",
+    "config/wsgi.py",
+    "config/settings/base.py",
+    "config/settings/dev.py",
+    "utils/typing.py",
+    "media/*"
+]
+
+[tool.coverage.report]
+sort = "-cover"
+exclude_lines = [
+    "pragma: no cover",
+    "if settings.DEBUG",
+    "def __repr__"
+]
+
+[tool.isort]
+src_paths = ["src"]
+profile = "black"
+line_length = 120
+known_django = "django"
+known_drf = "rest_framework"
+sections = ["FUTURE", "STDLIB", "DJANGO", "DRF", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+no_lines_before = ["LOCALFOLDER"]
+import_heading_future = "Imports from future"
+import_heading_stdlib = "Standard library"
+import_heading_django = "Django"
+import_heading_drf = "Django REST Framework"
+import_heading_thirdparty = "Third party"
+import_heading_firstparty = "Own"
+import_heading_localfolder = "Own"
+dedup_headings = true
+combine_as_imports = true
+only_modified = true
+verbose = true

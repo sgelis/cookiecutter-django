@@ -1,0 +1,10 @@
+{% raw %}{% extends "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/base_site.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Error" %} 403{% endblock %}
+
+{% block content %}
+  <div>
+    <p>{% translate "Forbidden" %}</p>
+  </div>
+{% endblock %}{% endraw %}

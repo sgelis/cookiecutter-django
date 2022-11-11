@@ -1,0 +1,2 @@
+{% raw %}{% load i18n %}
+<input type="{{ widget.type }}" name="{{ widget.name }}" placeholder="{% if widget.value != None %}{% translate "Not displayed" %}{% else %}{% translate "Not set yet" %}{% endif %}"{% include "django/forms/widgets/attrs.html" %}> <button class="button btn-new-token" type="button">{% translate "Generate new" %}</button>{% endraw %}

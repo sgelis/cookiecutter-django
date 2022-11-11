@@ -1,0 +1,29 @@
+{% raw %}{% load i18n %}{% load static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+<html lang="{{ LANGUAGE_CODE|default:"fr-ch" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/fonts/vendors/inter/inter.css" %}">
+  <link rel="stylesheet" href="{% static "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/css/{% endraw %}{{ cookiecutter.project_slug }}{% raw %}.css" %}">
+  {% block extrastyle %}{% endblock %}
+  {% block extrahead %}{% endblock %}
+  {% include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/includes/favicon.html" %}
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+</head>
+
+<body>
+<div id="container">
+  <header>{% block header %}{% endblock %}</header>
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<footer>{% block footer %}{% endblock %}</footer>
+
+<script src="{% static "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/js/bundle.js" %}"></script>
+{% block extrascripts %}{% endblock %}
+</body>
+</html>{% endraw %}
