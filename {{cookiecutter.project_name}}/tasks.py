@@ -21,7 +21,8 @@ def coverage(c, html=False, settings="config.settings.dev"):
         c.run(f"DJANGO_SETTINGS_MODULE={settings} coverage run --rcfile ../pyproject.toml -m pytest")
         if html:
             c.run("coverage html --rcfile ../pyproject.toml")
-            c.run('python -c \'import webbrowser; webbrowser.get("x-www-browser").open("htmlcov/index.html")\'')
+            c.run("echo Serving coverage report at http://localhost:9000…")
+            c.run("python -m http.server --directory htmlcov 9000")
         else:
             c.run("coverage report --rcfile ../pyproject.toml")
 
