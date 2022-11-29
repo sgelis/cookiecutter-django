@@ -10,7 +10,7 @@ repository = "https://github.com/{{ cookiecutter.company }}/{{ cookiecutter.proj
 [tool.poetry.dependencies]
 python = ">= 3.9, < 3.11"
 Django = "~4.1.3"
-django-axes = "==5.40.0"
+django-axes = "==5.40.1"
 django-cors-headers = "~3.13.0"
 django-csp = "~3.7"
 django-environ = "~0.9.0"
@@ -28,7 +28,10 @@ uritemplate = "~4.1.1"
 uWSGI = "~2.0.21"
 whitenoise = {extras = ["brotli"], version = "~6.2.0"}
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
 bandit = "^1.7.4"
 black = "^22.10.0"
 coverage = {extras = ["toml"], version = "^6.5.0"}
@@ -37,7 +40,7 @@ django-extensions = "^3.2.1"
 django-stubs = "^1.13.0"
 djangorestframework-stubs = "^1.8.0"
 invoke = "^1.7.3"
-ipython = "^8.6.0"
+ipython = "^8.7.0"
 isort = "^5.10.1"
 mkdocs = "^1.4.2"
 mkdocs-gen-files = "^0.4.0"
