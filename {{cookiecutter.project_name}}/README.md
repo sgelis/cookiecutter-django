@@ -1,4 +1,4 @@
-![Logo](src/static/{{cookiecutter.project_slug}}/img/logo.png)
+<img alt="Logo" height="256" src="src/static/{{cookiecutter.project_slug}}/img/logo.png" width="256"/>
 
 # {{ cookiecutter.project_name }}
 
