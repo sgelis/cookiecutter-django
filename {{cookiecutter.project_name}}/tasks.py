@@ -40,7 +40,7 @@ def bandit(c):
 @task
 def mkdocs(c, serve=False):
     if serve:
-        c.run("mkdocs serve")
+        c.run("mkdocs serve -a 0.0.0.0:9001")
     else:
         c.run("mkdocs build")
 
