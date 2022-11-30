@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    command: ./scripts/docker/run_prod.sh
+    volumes:
+      - app-static:/app/src/compiled_static
+      - app-media:/app/src/media
+      - app-logs:/var/log/{{ cookiecutter.project_slug }}
+    env_file:
+      - .env.deploy
+    depends_on:
+      - db
+      - cache
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+        - .env.deploy
+
+  cache:
+      image: memcached:1.6-alpine
+
+volumes:
+  app-static:
+  app-media:
+  app-logs:
+  postgres-data:
