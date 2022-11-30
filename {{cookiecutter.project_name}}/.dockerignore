@@ -1,0 +1,9 @@
+.git
+.idea
+res
+README.md
+
+**/.env*
+**/.gitignore
+**/Dockerfile
+**/docker-compose.yml

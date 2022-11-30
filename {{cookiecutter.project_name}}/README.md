@@ -15,7 +15,14 @@
     - Safari ≥ 13.4
     - Opera ≥ 67
 
-## Dev requirements
+# Dev requirements
+
+## Using Docker
+
+- Git ([Debian stable version](https://packages.debian.org/stable/git))
+- Docker ([Debian stable version](https://docs.docker.com/engine/install/debian/#install-using-the-repository))
+
+## Not using Docker
 
 - Git ([Debian stable version](https://packages.debian.org/stable/git))
 - Node ([latest version from NodeSource](https://github.com/nodesource/distributions/blob/master/README.md#debinstall))
@@ -25,34 +32,69 @@
 - PostgreSQL Client ([Debian stable version](https://packages.debian.org/stable/postgresql-client))
 - libpq-dev ([Debian stable version](https://packages.debian.org/stable/libpq-dev))
 - swig ([Debian stable version](https://packages.debian.org/stable/swig))
+- [Optional] memcache ([Debian stable version](https://packages.debian.org/stable/memcached))
 
-## Run locally
+# Contribute
+
+## With Docker
 
 ```sh
-git clone git@github.com:{{ cookiecutter.company }}/{{ cookiecutter.project_slug }}.git
-cd {{ cookiecutter.project_slug }}
-
-poetry install
-npm install
-
-node_modules/gulp/bin/gulp.js ts
-node_modules/gulp/bin/gulp.js sass
+git clone git@github.com:{{ cookiecutter.company }}/{{ cookiecutter.project_name }}.git
+cd {{ cookiecutter.project_name }}
 
 cp .env.template .env
 # Define environment variables as required
 nano .env
 
-poetry run python src/manage.py migrate
-poetry run python src/manage.py collectstatic
-poetry run python src/manage.py compilemessages
-poetry run python src/manage.py runserver_plus
+docker-compose build
+docker-compose run --rm -d app ./scripts/watch_dev.sh
+pycharm . &
 ```
 
-### Reset database after schema modifications
+🐍 After opening the project in PyCharm, you need to define the remote Python interpreter: the one sitting in the Python
+virtual environment in the Docker container. To do so: File → Settings → Project: {{ cookiecutter.project_name }} →
+Python Interpreter → Add Interpreter → On Docker Compose… → Choose service "app" → Choose "Virtualenv Environment" and
+set the path to `/app/.venv/bin/python`.
+
+🐍 PyCharm will complain about "black" and "isort" file watchers. This is due to
+[PyCharm being unable to run file watchers using the remote Python interpreter](https://youtrack.jetbrains.com/issue/WEB-9724/Support-remote-external-remote-tools-for-File-Watchers).
+An equivalent of these file watchers is provided by the [`python_file_watchers.sh`](scripts/python_file_watchers.sh)
+script that is itself called by the main [`watch_dev.sh`](scripts/watch_dev.sh) script.
+
+🛠 Use the following to drop in a shell interpreter into the app container:
 
 ```sh
-poetry run invoke reset-dev-db
+docker-compose run --rm -p 8000:8000 -p 9000:9000 -p 9001:9001 app bash
 ```
+
+🛠 Once in the shell interpreter, you can run the usual Invoke (see QA section) and Django commands, such as:
+
+```sh
+poetry run python src/manage.py migrate
+```
+
+## Without Docker
+
+```sh
+git clone git@github.com:{{ cookiecutter.company }}/{{ cookiecutter.project_slug }}.git
+cd {{ cookiecutter.project_slug }}
+
+poetry install --with dev
+npm install
+
+cp .env.template .env
+# Define environment variables as required
+nano .env
+
+node_modules/gulp/bin/gulp.js dev &
+
+pycharm . &
+```
+
+🐍 After opening the project in PyCharm, you need to define the local Python interpreter: the one sitting in the local
+Python virtual environment. To do so: File → Settings → Project: {{ cookiecutter.project_name }} →
+Python Interpreter → Add Local Interpreter… → Check "Existing" and check that the path points to
+`/path/to/{{ cookiecutter.project_name }}/.venv/bin.python`.
 
 ## QA
 
@@ -88,6 +130,11 @@ poetry run invoke mkdocs
 poetry run invoke mkdocs --serve
 ```
 
-## Deploy
+# Deploy
 
-TBD
+```sh
+cp .env.template
+# Define environment variables as required
+nano .env
+docker-compose -f docker-compose.deploy.yml build
+```
