@@ -1,0 +1,26 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "poetry"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+updates:
+  - package-ecosystem: "poetry"
+    directory: "/{{cookiecutter.project_name}}"
+    schedule:
+      interval: "weekly"
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/{{cookiecutter.project_name}}"
+    schedule:
+      interval: "weekly"
+
+updates:
+  - package-ecosystem: "docker"
+    directory: "/{{cookiecutter.project_name}}"
+    schedule:
+      interval: "weekly"
