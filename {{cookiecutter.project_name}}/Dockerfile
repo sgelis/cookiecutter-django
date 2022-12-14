@@ -1,4 +1,4 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.11-slim-bullseye
 EXPOSE 8000 9000 9001
 WORKDIR /app
 
