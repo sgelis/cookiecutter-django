@@ -5,11 +5,11 @@ from email.utils import parseaddr
 from pathlib import Path
 from typing import List
 
-# Third party
-import environ
-
 # Django
 from django.conf import global_settings
+
+# Third party
+import environ
 
 env = environ.Env(
     DEBUG=(bool, False),
@@ -211,6 +211,7 @@ SESSION_COOKIE_SECURE = True
 os.environ["wsgi.url_scheme"] = "https"
 
 # HTTP header Content-Security-Policy
+# https://django-csp-test.readthedocs.io/en/latest/
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 CSP_DEFAULT_SRC = ("'none'",)
 CSP_SCRIPT_SRC = ("'self'",)

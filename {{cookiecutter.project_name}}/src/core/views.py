@@ -11,6 +11,9 @@ from django.shortcuts import render
 from django.template import loader
 from django.utils.translation import gettext_lazy as _
 
+# Third party
+from csp.decorators import csp_exempt
+
 
 def browserconfig_xml(request: HttpRequest) -> HttpResponse:
     return render(request, "{{ cookiecutter.project_slug }}/browserconfig.xml")
@@ -36,6 +39,7 @@ def http500(request: HttpRequest, exception=None, template_name=None) -> HttpRes
     return HttpResponseServerError(template500.render(request=request, context={"exception": str(exception)}))
 
 
+@csp_exempt
 def index(request: HttpRequest) -> HttpResponse:
     context = {
         "title": _("Home"),

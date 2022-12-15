@@ -1,9 +1,13 @@
 .git
 .idea
 res
+src/frontend/README.md
+src/static/frontend/
 README.md
 
 **/.env*
 **/.gitignore
 **/Dockerfile
 **/docker-compose.yml
+/src/**/.angular/cache/
+/src/**/node_modules/

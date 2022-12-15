@@ -1,6 +1,20 @@
-{% raw %}{% extends "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/base_site.html" %}
-{% load i18n %}
+{% raw %}{% load i18n %}{% load static %}<!DOCTYPE html>
+  {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 
-{% block content %}
-  {% translate "Welcome home!" %}
-{% endblock %}{% endraw %}
+  <html lang="{{ LANGUAGE_CODE|default:"fr-ch" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <base href="/">
+    <link rel="stylesheet" href="{% static "frontend/styles.css" %}">
+    {% include "{% endraw %}{{ cookiecutter.project_slug }}{% raw %}/includes/favicon.html" %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+  </head>
+  <body>
+  <app-root></app-root>
+  <script src="{% static "frontend/runtime.js" %}" type="module"></script>
+  <script src="{% static "frontend/polyfills.js" %}" type="module"></script>
+  <script src="{% static "frontend/main.js" %}" type="module"></script>
+  </body>
+  </html>{% endraw %}

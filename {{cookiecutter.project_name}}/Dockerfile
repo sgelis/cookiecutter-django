@@ -9,7 +9,8 @@ ENV PYTHONUNBUFFERED=1 \
 
 RUN adduser --disabled-password app
 
-COPY --chown=app:app ./poetry.toml ./poetry.lock ./pyproject.toml package.json ./
+COPY --chown=app:app poetry.toml poetry.lock pyproject.toml package.json package-lock.json ./
+COPY --chown=app:app src/frontend/package.json src/frontend/package-lock.json src/frontend/
 RUN chown app:app . && \
     apt update && \
     apt -y upgrade && \
@@ -23,12 +24,14 @@ RUN chown app:app . && \
     pip install poetry=="${POETRY_VERSION}" && \
     su app -c 'poetry --no-cache --no-interaction --no-ansi install --with dev' && \
     su app -c 'npm install' && \
+    su app -c 'cd src/frontend && npm install' && \
     apt -y purge build-essential libpq-dev wget gpg && \
     apt -y autoremove && \
     apt -y purge ~c && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /home/app/.cache /home/app/.npm && \
+    rm -rf src/frontend/.angular/cache && \
     mkdir -m 775 /var/log/{{ cookiecutter.project_slug }} && \
     chown app:app /var/log/{{ cookiecutter.project_slug }}
 

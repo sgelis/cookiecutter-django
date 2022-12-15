@@ -6,37 +6,16 @@
 [![mypy: type checked](res/graphics/readme_badges/mypy.svg)](https://github.com/python/mypy)
 [![bandit: security](res/graphics/readme_badges/bandit.svg)](https://github.com/PyCQA/bandit)
 
-# User requirements
+# Contribute
 
-- Browser
-    - Firefox ≥ 74 (recommended)
-    - Chrome ≥ 80
-    - Edge ≥ 80
-    - Safari ≥ 13.4
-    - Opera ≥ 67
+## With Docker
 
-# Dev requirements
-
-## Using Docker
+### Requirements
 
 - Git ([Debian stable version](https://packages.debian.org/stable/git))
 - Docker ([Debian stable version](https://docs.docker.com/engine/install/debian/#install-using-the-repository))
 
-## Not using Docker
-
-- Git ([Debian stable version](https://packages.debian.org/stable/git))
-- Node ([latest version from NodeSource](https://github.com/nodesource/distributions/blob/master/README.md#debinstall))
-- Python 3 ([Debian stable version](https://packages.debian.org/stable/python3))
-- Poetry ([latest version](https://python-poetry.org/docs/#osx--linux--bashonwindows-install-instructions))
-- PostgreSQL ([Debian stable version](https://packages.debian.org/stable/postgresql))
-- PostgreSQL Client ([Debian stable version](https://packages.debian.org/stable/postgresql-client))
-- libpq-dev ([Debian stable version](https://packages.debian.org/stable/libpq-dev))
-- swig ([Debian stable version](https://packages.debian.org/stable/swig))
-- [Optional] memcache ([Debian stable version](https://packages.debian.org/stable/memcached))
-
-# Contribute
-
-## With Docker
+### Getting started
 
 ```sh
 git clone git@github.com:{{ cookiecutter.company }}/{{ cookiecutter.project_name }}.git
@@ -75,6 +54,20 @@ poetry run python src/manage.py migrate
 
 ## Without Docker
 
+### Requirements
+
+- Git ([Debian stable version](https://packages.debian.org/stable/git))
+- Node ([latest version from NodeSource](https://github.com/nodesource/distributions/blob/master/README.md#debinstall))
+- Python 3 ([Debian stable version](https://packages.debian.org/stable/python3))
+- Poetry ([latest version](https://python-poetry.org/docs/#osx--linux--bashonwindows-install-instructions))
+- PostgreSQL ([Debian stable version](https://packages.debian.org/stable/postgresql))
+- PostgreSQL Client ([Debian stable version](https://packages.debian.org/stable/postgresql-client))
+- libpq-dev ([Debian stable version](https://packages.debian.org/stable/libpq-dev))
+- swig ([Debian stable version](https://packages.debian.org/stable/swig))
+- [Optional] memcached ([Debian stable version](https://packages.debian.org/stable/memcached))
+
+### Getting started
+
 ```sh
 git clone git@github.com:{{ cookiecutter.company }}/{{ cookiecutter.project_slug }}.git
 cd {{ cookiecutter.project_slug }}
@@ -87,6 +80,7 @@ cp .env.template .env
 nano .env
 
 node_modules/gulp/bin/gulp.js dev &
+src/frontend/node_modules/@angular/cli/bin/ng.js watch &
 
 pycharm . &
 ```
@@ -94,9 +88,11 @@ pycharm . &
 🐍 After opening the project in PyCharm, you need to define the local Python interpreter: the one sitting in the local
 Python virtual environment. To do so: File → Settings → Project: {{ cookiecutter.project_name }} →
 Python Interpreter → Add Local Interpreter… → Check "Existing" and check that the path points to
-`/path/to/{{ cookiecutter.project_name }}/.venv/bin.python`.
+`/path/to/{{ cookiecutter.project_name }}/.venv/bin/python`.
 
-## QA
+# QA
+
+## Back-end
 
 ### Run tests
 
@@ -128,6 +124,14 @@ poetry run invoke bandit
 poetry run invoke mkdocs
 # Serve docs dynamically
 poetry run invoke mkdocs --serve
+```
+
+## Front-end
+
+### Run tests
+
+```sh
+src/frontend/node_modules/@angular/cli/bin/ng.js test
 ```
 
 # Deploy
