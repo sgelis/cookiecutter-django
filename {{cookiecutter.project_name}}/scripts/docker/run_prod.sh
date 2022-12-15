@@ -3,6 +3,7 @@
 set -euxo pipefail
 
 node_modules/gulp/bin/gulp.js build
+src/frontend/node_modules/@angular/cli/bin/ng.js build
 wait-for-it db:5432 --strict -- poetry run python src/manage.py migrate
 poetry run python src/manage.py collectstatic --no-input
 poetry run python src/manage.py compilemessages

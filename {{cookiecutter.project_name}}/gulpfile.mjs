@@ -18,22 +18,22 @@ import watchify from "watchify";
 const paths = {
     styles: {
         scss: {
-            src: "src/**/*.scss",
+            src: [
+                "src/**/*.scss",
+                "!src/frontend/**/*.scss",
+            ],
             dest: "src/",
         },
         css: {
-            src: "src/**/*.css",
+            src: [
+                "src/**/*.css",
+                "!src/frontend/**/*.css",
+            ],
             dest: "src/",
         },
     },
     scripts: {
         ts: {
-            front: {
-                entryPoints: [
-                    "src/static/{{ cookiecutter.project_slug }}/js/main.ts",
-                ],
-                bundle: "src/static/{{ cookiecutter.project_slug }}/js/",
-            },
             admin: {
                 entryPoints: [
                     "src/static/admin/js/main.ts",
@@ -42,21 +42,15 @@ const paths = {
             },
         },
         js: {
-            src: "src/**/*.js",
+            src: [
+                "src/**/*.js",
+                "!src/frontend/**/*.js",
+            ],
             dest: "src/",
         },
     },
 };
 
-const watchedFrontBrowserify = watchify(
-    browserify({
-        basedir: ".",
-        debug: true,
-        entries: paths.scripts.ts.front.entryPoints,
-        cache: {},
-        packageCache: {},
-    }).plugin(tsify)
-);
 const watchedAdminBrowserify = watchify(
     browserify({
         basedir: ".",
@@ -64,7 +58,7 @@ const watchedAdminBrowserify = watchify(
         entries: paths.scripts.ts.admin.entryPoints,
         cache: {},
         packageCache: {},
-    }).plugin(tsify)
+    }).plugin(tsify, { files: [] })
 );
 
 
@@ -81,41 +75,21 @@ gulp.task("uglify:css", function () {
         .pipe(gulp.dest(paths.styles.css.dest))
 });
 
-gulp.task("ts:front", function () {
-    return browserify({
-            basedir: ".",
-            debug: true,
-            entries: paths.scripts.ts.front.entryPoints,
-            cache: {},
-            packageCache: {},
-        })
-            .plugin(tsify)
-            .bundle()
-            .pipe(source("bundle.js"))
-            .pipe(gulp.dest(paths.scripts.ts.front.bundle))
-});
 
 gulp.task("ts:admin", function () {
     return browserify({
-            basedir: ".",
-            debug: true,
-            entries: paths.scripts.ts.admin.entryPoints,
-            cache: {},
-            packageCache: {},
-        })
-            .plugin(tsify)
-            .bundle()
-            .pipe(source("bundle.js"))
-            .pipe(gulp.dest(paths.scripts.ts.admin.bundle))
+        basedir: ".",
+        debug: true,
+        entries: paths.scripts.ts.admin.entryPoints,
+        cache: {},
+        packageCache: {},
+    })
+        .plugin(tsify, { files: [] })
+        .bundle()
+        .pipe(source("bundle.js"))
+        .pipe(gulp.dest(paths.scripts.ts.admin.bundle))
 });
 
-function watchTsFront () {
-    return watchedFrontBrowserify
-        .bundle()
-        .on("error", fancyLog)
-        .pipe(source("bundle.js"))
-        .pipe(gulp.dest(paths.scripts.ts.front.bundle))
-}
 
 function watchTsAdmin () {
     return watchedAdminBrowserify
@@ -139,18 +113,16 @@ gulp.task("rmSrc", function () {
 });
 
 
-gulp.task("watch:ts", gulp.parallel(watchTsFront, watchTsAdmin));
+gulp.task("watch:ts", watchTsAdmin);
 gulp.task("watch:sass", function () {
     return gulp.watch(paths.styles.scss.src, {ignoreInitial: false}, gulp.series("sass"))
 });
 gulp.task("watch", gulp.parallel("watch:ts", "watch:sass"));
 gulp.task("dev", gulp.series("watch"));
-gulp.task("build:ts", gulp.series(gulp.parallel("ts:front", "ts:admin"), "uglify:js"));
+gulp.task("build:ts", gulp.series("ts:admin", "uglify:js"));
 gulp.task("build:sass", gulp.series("sass", "uglify:css"));
 gulp.task("build", gulp.parallel("build:ts", "build:sass"));
 gulp.task("default", gulp.series("build"));
 
-watchedFrontBrowserify.on("update", watchTsFront)
-watchedFrontBrowserify.on("log", fancyLog)
 watchedAdminBrowserify.on("update", watchTsAdmin)
 watchedAdminBrowserify.on("log", fancyLog)

@@ -80,6 +80,12 @@ cython_debug/
 # MkDocs build
 docs/build
 
+# Angular cache
+.angular/cache
+
+# Compiled Angular statics
+src/static/frontend/
+
 # PyCharm
 #
 # Copied from the official `cookiecutter-django` repository

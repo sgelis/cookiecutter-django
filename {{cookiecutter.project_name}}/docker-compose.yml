@@ -1,33 +1,37 @@
 version: "3.9"
 
 services:
-  app:
-    build:
-      context: .
-    ports:
-      - "8000:8000"
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - ./src:/app/src
-      - ./log:/app/log
-    env_file:
-      - .env
-    depends_on:
-      - db
-      - cache
+    app:
+        build:
+            context: .
+        ports:
+            - "8000:8000"
+            - "9000:9000"
+            - "9001:9001"
+        volumes:
+            - ./src:/app/src
+            - ./log:/app/log
+            # This makes the node_modules directory of the container available to the host.
+            # Since this path is a subpath of `src`, omitting the next line means that the `node_modules` subpath would get
+            # "overwritten" (actually deleted) by the absence of this subpath on the host machine.
+            - /app/src/frontend/node_modules
+        env_file:
+            - .env
+        depends_on:
+            - db
+            - cache
 
-  db:
-    image: postgres:15-alpine
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB={{ cookiecutter.project_slug }}
-      - POSTGRES_USER={{ cookiecutter.project_slug }}
-      - POSTGRES_PASSWORD=abc123
+    db:
+        image: postgres:15-alpine
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB={{ cookiecutter.project_slug }}
+            - POSTGRES_USER={{ cookiecutter.project_slug }}
+            - POSTGRES_PASSWORD=abc123
 
-  cache:
-    image: memcached:1.6-alpine
+    cache:
+        image: memcached:1.6-alpine
 
 volumes:
-  postgres-data:
+    postgres-data:
