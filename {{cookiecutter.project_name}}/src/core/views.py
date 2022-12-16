@@ -7,7 +7,7 @@ from csp.decorators import csp_exempt
 
 
 def browserconfig_xml(request: HttpRequest) -> HttpResponse:
-    return render(request, "{{ cookiecutter.project_slug }}/browserconfig.xml")
+    return render(request, "{{ cookiecutter.project_slug }}/browserconfig.xml", content_type="text/xml")
 
 
 @csp_exempt
@@ -16,8 +16,8 @@ def index(request: HttpRequest) -> HttpResponse:
 
 
 def robots_txt(request: HttpRequest) -> HttpResponse:
-    return render(request, "{{ cookiecutter.project_slug }}/robots.txt")
+    return render(request, "{{ cookiecutter.project_slug }}/robots.txt", content_type="text/plain")
 
 
 def site_webmanifest(request: HttpRequest) -> HttpResponse:
-    return render(request, "{{ cookiecutter.project_slug }}/site.webmanifest")
+    return render(request, "{{ cookiecutter.project_slug }}/site.webmanifest", content_type="application/manifest+json")
