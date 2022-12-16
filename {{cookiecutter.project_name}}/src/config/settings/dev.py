@@ -1,3 +1,6 @@
+# Standard library
+import socket
+
 # Own
 from .base import *
 
@@ -6,7 +9,8 @@ MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 # django-debug-toolbar
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
-INTERNAL_IPS = ("127.0.0.1",)
+hostname, __, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "localhost"]
 DEBUG_TOOLBAR_CONFIG = {
     "DISABLE_PANELS": ("debug_toolbar.panels.redirects.RedirectsPanel",),
     "SHOW_TEMPLATE_CONTEXT": True,

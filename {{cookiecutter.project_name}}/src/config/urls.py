@@ -14,7 +14,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from auth import views as custom_auth_views
 
 urlpatterns = [
-    path("", include("core.urls")),
     path("api/v1/core/", include("core.rest.v1.urls", namespace="v1")),
     path("api/v1/doc/", SpectacularSwaggerView.as_view(url_name="rest_schema"), name="swagger_doc"),
     path("api/v1/schema/", SpectacularAPIView.as_view(api_version="v1"), name="rest_schema"),
@@ -30,13 +29,9 @@ urlpatterns = [
         name="password_reset_confirm",
     ),
     path("reset/done/", auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    # This path absolutely needs to come last, otherwise Angular will block access to all other paths
+    path("", include("core.urls")),
 ]
-
-
-handler400 = "core.views.http400"
-handler403 = "core.views.http403"
-handler404 = "core.views.http404"
-handler500 = "core.views.http500"
 
 
 if settings.DEBUG:

@@ -122,6 +122,7 @@ gulp.task("dev", gulp.series("watch"));
 gulp.task("build:ts", gulp.series("ts:admin", "uglify:js"));
 gulp.task("build:sass", gulp.series("sass", "uglify:css"));
 gulp.task("build", gulp.parallel("build:ts", "build:sass"));
+gulp.task("build:dev", gulp.parallel("ts:admin", "sass"));
 gulp.task("default", gulp.series("build"));
 
 watchedAdminBrowserify.on("update", watchTsAdmin)
