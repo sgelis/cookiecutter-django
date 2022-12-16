@@ -2,8 +2,7 @@
 from typing import List, Union
 
 # Django
-from django.conf import settings
-from django.urls import URLPattern, URLResolver, path
+from django.urls import URLPattern, URLResolver, path, re_path
 
 # Own
 from . import views
@@ -16,4 +15,5 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("browserconfig.xml", views.browserconfig_xml, name="browserconfig_xml"),
     path("robots.txt", views.robots_txt, name="robots_txt"),
     path("site.webmanifest", views.site_webmanifest, name="site_webmanifest"),
+    re_path(r"^.*/$", views.index, name="index"),
 ]
