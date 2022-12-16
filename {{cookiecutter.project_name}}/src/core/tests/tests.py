@@ -1,6 +1,5 @@
 # Django
 from django.db import connection
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotFound, HttpResponseServerError
 from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from django.utils.translation import gettext
@@ -11,7 +10,6 @@ import pytest
 # Own
 from utils.typing import AuthenticatedWSGIRequest
 from ..models import CachedSettings, Settings
-from ..views import http400, http403, http404, http500
 
 
 class TestSettingsModel:
@@ -102,25 +100,3 @@ class TestViews:
     def test_site_webmanifest(self, client):
         response = client.get(reverse("core:site_webmanifest"))
         assert response.status_code == 200
-
-
-class TestErrorViews:
-    def test_400(self, rf):
-        request = rf.get(reverse("core:index"))
-        response = http400(request)
-        assert isinstance(response, HttpResponseBadRequest)
-
-    def test_403(self, rf):
-        request = rf.get(reverse("core:index"))
-        response = http403(request)
-        assert isinstance(response, HttpResponseForbidden)
-
-    def test_404(self, rf):
-        request = rf.get(reverse("core:index"))
-        response = http404(request)
-        assert isinstance(response, HttpResponseNotFound)
-
-    def test_500(self, rf):
-        request = rf.get(reverse("core:index"))
-        response = http500(request)
-        assert isinstance(response, HttpResponseServerError)
