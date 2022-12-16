@@ -33,12 +33,6 @@ urlpatterns = [
 ]
 
 
-handler400 = "core.views.http400"
-handler403 = "core.views.http403"
-handler404 = "core.views.http404"
-handler500 = "core.views.http500"
-
-
 if settings.DEBUG:
     # Correct URLs to serve media in development
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,6 +6,7 @@ from invoke import task
 def build_frontend_assets(c):
     c.run("rm -rf src/compiled_static/*")
     c.run("node_modules/gulp/bin/gulp.js build")
+    c.run("src/frontend/node_modules/@angular/cli/bin/ng.js build")
     c.run("python src/manage.py collectstatic --no-input")
 
 
