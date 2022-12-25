@@ -6,6 +6,71 @@
 [![mypy: type checked](res/graphics/readme_badges/mypy.svg)](https://github.com/python/mypy)
 [![bandit: security](res/graphics/readme_badges/bandit.svg)](https://github.com/PyCQA/bandit)
 
+# Project layout
+
+```sh
+{{ cookiecutter.project_name }}
+├── .dockerignore
+├── .editorconfig                # Project codestyle
+├── .env.deploy.example          # Example .env files
+├── .env.dev.docker.example
+├── .env.dev.example
+├── .env.template                # Main .env template explaining all used environment variables
+├── .gitignore
+├── docs/                        # Developer documentation generated with MkDocs Material
+├── .idea/                       # Sane default PyCharm project settings
+├── log/
+├── res/                         # Static project resources
+├── scripts/                     # Useful helper scripts
+├── src/                         # Project sources
+│   ├── auth/
+│   ├── compiled_static/
+│   ├── config/                  # Django root configuration package
+│   │   ├── admin/
+│   │   ├── settings/            # Django settings package
+│   │   ├── tests/
+│   │   ├── __init__.py
+│   │   ├── apps.py
+│   │   ├── asgi.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── core/
+│   ├── frontend/                # Angular front-end project
+│   │   ├── src/
+│   │   ├── .gitignore
+│   │   ├── angular.json
+│   │   ├── karma.conf.js
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── README.md
+│   │   ├── tsconfig.app.json
+│   │   ├── tsconfig.json
+│   │   └── tsconfig.spec.json
+│   ├── locale/
+│   ├── media/
+│   ├── static/
+│   ├── templates/
+│   ├── templatetags/
+│   ├── users/
+│   ├── utils/
+│   ├── conftest.py
+│   └── manage.py
+├── CHANGELOG.md
+├── docker-compose.deploy.yml    # Deployment-ready Docker Compose file
+├── docker-compose.yml           # Development Docker Compose file
+├── Dockerfile
+├── Gulpfile.mjs
+├── mkdocs.yml
+├── package.json
+├── package-lock.json
+├── poetry.lock
+├── poetry.toml
+├── pyproject.toml
+├── README.md                    # <-- You are here
+├── tasks.py
+└── tsconfig.json
+```
+
 # Contribute
 
 ## With Docker
