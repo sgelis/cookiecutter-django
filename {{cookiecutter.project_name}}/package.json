@@ -15,7 +15,7 @@
     "gulp-typescript": "6.0.0-alpha.1",
     "gulp-uglify-es": "3.0.0",
     "node-sass": "8.0.0",
-    "postcss": "8.4.19",
+    "postcss": "8.4.21",
     "postcss-cli": "10.0.0",
     "sass": "1.56.1",
     "tsify": "5.0.4",
