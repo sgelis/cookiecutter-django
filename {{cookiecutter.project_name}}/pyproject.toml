@@ -18,7 +18,7 @@ django-filter = "~22.1"
 django-request-logging = "~0.7.5"
 djangorestframework = "~3.14.0"
 djangorestframework-simplejwt = "~5.2.2"
-drf-spectacular = {extras = ["sidecar"], version = "~0.25.0"}
+drf-spectacular = {extras = ["sidecar"], version = "~0.25.1"}
 psycopg2 = "~2.9.5"
 pymemcache = "~4.0.0"
 pyuca = "~1.2"
