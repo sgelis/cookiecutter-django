@@ -19,8 +19,13 @@ for path in sorted(Path("src").rglob("*.py")):
 
     parts = list(module_path.parts)
 
-    # Skip test packages and modules
-    if "tests" in parts or "conftest" in parts or any((part.startswith("test") for part in parts)):
+    # Skip test packages/modules and node_modules directories
+    if (
+        "tests" in parts
+        or "conftest" in parts
+        or any((part.startswith("test") for part in parts))
+        or "node_modules" in parts
+    ):
         continue
     # Skip Django migrations
     # N.B.: this will leave the "migrations" package page, since its "__init__" is not excluded. This is done on

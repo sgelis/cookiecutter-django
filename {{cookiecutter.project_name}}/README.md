@@ -90,8 +90,8 @@ cp .env.template .env
 # Define environment variables as required
 nano .env
 
-docker-compose build
-docker-compose run --rm -d app ./scripts/watch_dev.sh
+docker compose build
+docker compose run --rm -d app ./scripts/watch_dev.sh
 pycharm . &
 ```
 
@@ -105,13 +105,13 @@ set the path to `/app/.venv/bin/python`.
 An equivalent of these file watchers is provided by the [`python_file_watchers.sh`](scripts/python_file_watchers.sh)
 script that is itself called by the main [`watch_dev.sh`](scripts/watch_dev.sh) script.
 
-🛠 Use the following to drop in a shell interpreter into the app container:
+🐋 Use the following to drop in a shell interpreter into the app container:
 
 ```sh
-docker-compose run --rm -p 8000:8000 -p 9000:9000 -p 9001:9001 app bash
+docker compose run --rm -p 8000:8000 -p 9000:9000 -p 9001:9001 app bash
 ```
 
-🛠 Once in the shell interpreter, you can run the usual Invoke (see QA section) and Django commands, such as:
+🐍 Once in the shell interpreter, you can run the usual Invoke (see QA section) and Django commands, such as:
 
 ```sh
 poetry run python src/manage.py migrate
@@ -205,5 +205,5 @@ src/frontend/node_modules/@angular/cli/bin/ng.js test
 cp .env.template
 # Define environment variables as required
 nano .env
-docker-compose -f docker-compose.deploy.yml build
+docker compose -f docker compose.deploy.yml build
 ```

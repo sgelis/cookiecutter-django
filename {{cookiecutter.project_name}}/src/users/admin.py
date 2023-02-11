@@ -21,7 +21,7 @@ from .models import User
 class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_fieldsets = ((None, {"classes": ("wide",), "fields": ("username", "password1", "password2")}),)
-    fieldsets = (  # type: ignore[assignment]  # stubs issue
+    fieldsets = (
         (None, {"fields": ("username", "password", "access_token")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),
         (_("Settings"), {"fields": ("language",)}),

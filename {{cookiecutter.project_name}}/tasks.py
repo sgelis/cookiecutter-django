@@ -36,7 +36,7 @@ def mypy(c):
 
 @task
 def bandit(c):
-    c.run("bandit -r src -x 'tests'")
+    c.run("bandit -c pyproject.toml -r src")
 
 
 @task
