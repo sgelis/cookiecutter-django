@@ -1,11 +1,11 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.11-slim-bullseye
 EXPOSE 8000 9000 9001
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONFAULTHANDLER=1 \
-    POETRY_VERSION="1.2.2" \
-    NODE_VERSION=18
+    POETRY_VERSION="1.3.2" \
+    NODE_VERSION=19
 
 RUN adduser --disabled-password app
 
