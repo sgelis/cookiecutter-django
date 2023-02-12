@@ -57,4 +57,4 @@ class CustomAdminSite(admin.sites.AdminSite):
         return response
 
     def simpler_autocomplete_view(self, request: AuthenticatedWSGIRequest) -> JsonResponse:
-        return SimplerAutocompleteJsonView.as_view(admin_site=self)(request)  # type: ignore[return-value]  # being more specific than parent here
+        return SimplerAutocompleteJsonView.as_view(admin_site=self)(request)  # type: ignore[return-value]  # being more specific than parent here  # noqa: E501

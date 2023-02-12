@@ -1,6 +1,3 @@
-# Standard library
-from typing import Optional
-
 # Django
 from django.db import models
 from django.utils.translation import gettext, gettext_lazy as _

@@ -15,5 +15,5 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
     def form_valid(self, form: SetPasswordForm) -> HttpResponse:
         user = form.save()
-        axes_reset(username=user.username)  # type: ignore[attr-defined]  # "AbstractBaseUser" has no attribute "username"
+        axes_reset(username=user.username)  # type: ignore[attr-defined]  # "AbstractBaseUser" has no attribute "username"  # noqa: E501
         return super().form_valid(form)

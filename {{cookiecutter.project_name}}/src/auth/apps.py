@@ -12,5 +12,4 @@ class AuthConfig(AppConfig):
     def ready(self) -> None:
         super().ready()
         # Own
-        # noinspection PyUnresolvedReferences
-        from . import signals
+        from . import signals  # noqa: F401

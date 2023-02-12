@@ -2,10 +2,12 @@
 import socket
 
 # Own
-from .base import *
+from .base import *  # noqa: F403
 
-INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS + ["debug_toolbar", "django_extensions"]
-MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+INSTALLED_APPS = (
+    ["whitenoise.runserver_nostatic"] + INSTALLED_APPS + ["debug_toolbar", "django_extensions"]  # noqa: F405
+)
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa: F405
 
 # django-debug-toolbar
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
@@ -38,7 +40,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": BASE_DIR.parent / "log" / "main.log",
+            "filename": BASE_DIR.parent / "log" / "main.log",  # noqa: F405
             "maxBytes": 1024 * 1024 * 5,  # 5 MB
             "backupCount": 7,
             "formatter": "verbose",

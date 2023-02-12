@@ -168,7 +168,7 @@ class TestUserAdmin:
         assert perm is True
 
     @pytest.mark.django_db
-    def test_has_change_permission_unprivileged_self_edit(self, rf, user_alice, user_bob):
+    def test_has_change_permission_unprivileged_edit_other(self, rf, user_alice, user_bob):
         """
         Alice is not allowed to edit other users
         """
@@ -179,7 +179,7 @@ class TestUserAdmin:
         assert perm is False
 
     @pytest.mark.django_db
-    def test_has_change_permission_unprivileged_self_edit(self, rf, user_alice, user_bob):
+    def test_has_change_permission_privileged_edit_other(self, rf, user_alice, user_bob):
         """
         Privileged non-super users can edit other users
         """

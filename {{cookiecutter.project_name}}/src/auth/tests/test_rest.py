@@ -29,7 +29,7 @@ class TestUserTokenAuthentication:
         raw_access_token = "def456"
         user_alice.access_token = make_password(raw_access_token, settings.SECRET_KEY)
         user_alice.save()
-        request = rf.get(self.url_ping, HTTP_AUTHORIZATION=f"Bearer ghi678")
+        request = rf.get(self.url_ping, HTTP_AUTHORIZATION="Bearer ghi678")
         response = self.backend.authenticate(request)
         assert response is None
 

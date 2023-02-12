@@ -14,6 +14,8 @@ cookiecutter = "^2.1.1"
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.4"
 black = "^23.1.0"
+flake8 = "6.0.0"
+flake8-isort = "6.0.0"
 invoke = "^2.0.0"
 isort = "^5.12.0"
 mypy = "^1.0.0"
@@ -26,3 +28,37 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
+
+[tool.mypy]
+allow_redefinition = true
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+show_error_codes = true
+pretty = true
+
+[tool.isort]
+src_paths = ["src"]
+profile = "black"
+line_length = 120
+known_django = "django"
+known_drf = "rest_framework"
+sections = ["FUTURE", "STDLIB", "DJANGO", "DRF", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+no_lines_before = ["LOCALFOLDER"]
+import_heading_future = "Imports from future"
+import_heading_stdlib = "Standard library"
+import_heading_django = "Django"
+import_heading_drf = "Django REST Framework"
+import_heading_thirdparty = "Third party"
+import_heading_firstparty = "Own"
+import_heading_localfolder = "Own"
+dedup_headings = true
+combine_as_imports = true
+only_modified = true
+verbose = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "node_modules"]

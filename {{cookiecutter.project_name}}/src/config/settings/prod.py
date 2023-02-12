@@ -1,5 +1,5 @@
 # Own
-from .base import *
+from .base import *  # noqa: F403
 
 LOGGING = {
     "version": 1,
@@ -14,7 +14,7 @@ LOGGING = {
         "file": {
             "level": "INFO",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": Path("/var") / "log" / PROJECT_SLUG / "main.log",
+            "filename": Path("/var") / "log" / PROJECT_SLUG / "main.log",  # noqa: F405
             "maxBytes": 1024 * 1024 * 5,  # 5 MB
             "backupCount": 7,
             "formatter": "simple",

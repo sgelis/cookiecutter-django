@@ -1,6 +1,3 @@
-# noinspection PyUnresolvedReferences
 # Own
-from core.tests.conftest import *
-
-# noinspection PyUnresolvedReferences
-from users.tests.conftest import *
+from core.tests.conftest import *  # noqa: F401,F403
+from users.tests.conftest import *  # noqa: F401,F403
