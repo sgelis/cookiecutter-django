@@ -26,7 +26,7 @@ PyYAML = "~6.0"
 typing-extensions = "~4.4.0"
 uritemplate = "~4.1.1"
 uWSGI = "~2.0.21"
-whitenoise = {extras = ["brotli"], version = "~6.2.0"}
+whitenoise = {extras = ["brotli"], version = "~6.3.0"}
 
 [tool.poetry.group.dev]
 optional = true
