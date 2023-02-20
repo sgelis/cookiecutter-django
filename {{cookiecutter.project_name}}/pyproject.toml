@@ -23,7 +23,7 @@ psycopg2 = "~2.9.5"
 pymemcache = "~4.0.0"
 pyuca = "~1.2"
 PyYAML = "~6.0"
-typing-extensions = "~4.4.0"
+typing-extensions = "~4.5.0"
 uritemplate = "~4.1.1"
 uWSGI = "~2.0.21"
 whitenoise = {extras = ["brotli"], version = "~6.2.0"}
