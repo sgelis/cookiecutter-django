@@ -12,7 +12,7 @@ python = ">= 3.9, < 3.12"
 cookiecutter = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
-bandit = "^1.7.4"
+bandit = "^1.7.5"
 black = "^23.1.0"
 invoke = "^2.0.0"
 isort = "^5.12.0"
