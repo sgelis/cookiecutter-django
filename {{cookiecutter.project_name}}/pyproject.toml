@@ -9,7 +9,7 @@ repository = "https://github.com/{{ cookiecutter.company }}/{{ cookiecutter.proj
 
 [tool.poetry.dependencies]
 python = ">= 3.9, < 3.12"
-Django = "~4.1.6"
+Django = "~4.2.1"
 django-axes = "==5.40.1"
 django-cors-headers = "~3.13.0"
 django-csp = "~3.7"
